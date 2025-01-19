@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.env
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv/
+
+# Django Stuff
+*.db
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# PostgreSQL Dumps
+*.sql
+
+# Figma Exports (if any)
+*.fig
+
+# Environment Variables
+.env
+.env.*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node modules (if frontend tooling is added later)
+node_modules/
