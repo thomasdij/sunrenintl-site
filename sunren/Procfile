@@ -1,1 +1,1 @@
-web: gunicorn sunren_site.wsgi
+web: gunicorn sunren.wsgi
