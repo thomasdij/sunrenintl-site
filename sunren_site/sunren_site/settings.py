@@ -22,12 +22,6 @@ ALLOWED_HOSTS = ['sunrenintl-site.onrender.com', 'localhost', '127.0.0.1']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    ...
-]
-
 # Enable Whitenoise compression
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -54,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -101,17 +96,6 @@ else:
     DATABASES = {
         'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
     }
-
-        # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.postgresql',
-    #         'NAME': config('DB_NAME'),
-    #         'USER': config('DB_USER'),
-    #         'PASSWORD': config('DB_PASSWORD'),
-    #         'HOST': config('DB_HOST'),
-    #         'PORT': config('DB_PORT', default='5432'),
-    #     }
-    # }
 
 
 # Password validation
