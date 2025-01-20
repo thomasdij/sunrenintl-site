@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'sunren_site.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-if config('MODE')=="dev":
+if config('MODE', default='dev')=="dev":
     DATABASES = {
                 'default': {
             'ENGINE': 'django.db.backends.postgresql',
