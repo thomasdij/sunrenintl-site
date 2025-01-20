@@ -43,3 +43,17 @@
 ## To Do for Kyle
 
 - Create favicon
+
+## Admin Accounts
+
+# Usernames
+- thomasd
+- kylep
+- surens
+
+Contact Thomas for initial passwords.
+
+## Hosting Estimates
+- **Web Service** $7.90 per month
+- **Database** $6.30 per month
+    - $7.60 if supporting documents (MSDS etc.) are added
