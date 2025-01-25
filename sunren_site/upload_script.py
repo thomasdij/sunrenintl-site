@@ -10,7 +10,7 @@ django.setup()
 
 from chemicals.models import Chemical, ChemicalGroup
 
-with open('sunren_site/RawProductList.csv', 'r', encoding='utf-8-sig') as file:
+with open('RawProductList.csv', 'r', encoding='utf-8-sig') as file:
     reader = csv.DictReader(file)
     for row in reader:
         print(reader.fieldnames)
