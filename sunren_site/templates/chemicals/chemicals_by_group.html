@@ -1,0 +1,8 @@
+<h1>Chemicals in {{ group.name }}</h1>
+<ul>
+    {% for chemical in chemicals %}
+        <li>
+            <a href="{% url 'chemical_detail' chemical.id %}">{{ chemical.name }}</a>
+        </li>
+    {% endfor %}
+</ul>

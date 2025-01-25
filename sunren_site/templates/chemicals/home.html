@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chemical Database</title>
+</head>
+<body>
+    <header>
+        <h1>Chemical Database</h1>
+        <form method="get" action="{% url 'home' %}">
+            <input type="text" name="q" placeholder="Search chemicals..." value="{{ query }}">
+            <button type="submit">Search</button>
+        </form>
+    </header>
+
+    <main>
+        {% if chemicals %}
+            <h2>Search Results</h2>
+            <ul>
+                {% for chemical in chemicals %}
+                    <li>
+                        <a href="{% url 'chemical_detail' chemical.id %}">{{ chemical.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% elif query %}
+            <p>No chemicals found for "{{ query }}".</p>
+        {% endif %}
+
+        <h2>Chemical Groups</h2>
+        <ul>
+            {% for group in groups %}
+                <li>
+                    <a href="{% url 'chemicals_by_group' group.id %}">{{ group.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    <footer>
+        <h2>Contact Us</h2>
+        <p>Placeholder Contact Info: example@chemicaldatabase.com | +1-123-456-7890</p>
+    </footer>
+</body>
+</html>
+
+

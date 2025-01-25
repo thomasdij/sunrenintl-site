@@ -51,7 +51,7 @@
 - kylep
 - surens
 
-Contact Thomas for initial passwords.
+Contact Thomas for initial passwords. Each admin has been configured with thier appropriate privilges. Contact Thomas to add/remove admins or privilges.
 
 ## Hosting Estimates
 - **Web Service** $7.90 per month

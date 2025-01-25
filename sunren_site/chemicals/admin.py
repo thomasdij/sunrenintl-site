@@ -3,5 +3,5 @@ from .models import Chemical
 
 @admin.register(Chemical)
 class ChemicalAdmin(admin.ModelAdmin):
-    list_display = ('name', 'group', 'un_no', 'cas_no', 'created_at')
-    search_fields = ('name', 'group', 'cas_no')
+    list_display = ('name', 'group', 'hs_code', 'cas_number', 'uses')
+    search_fields = ('name', 'uses', 'cas_number')
