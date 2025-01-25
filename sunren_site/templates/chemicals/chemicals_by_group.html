@@ -1,8 +1,29 @@
-<h1>Chemicals in {{ group.name }}</h1>
-<ul>
-    {% for chemical in chemicals %}
-        <li>
-            <a href="{% url 'chemical_detail' chemical.id %}">{{ chemical.name }}</a>
-        </li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ group.name }} - Chemicals</title>
+</head>
+<body>
+    <h1>Chemicals in {{ group.name }}</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>CAS#</th>
+                <th>H.S. Code</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for chemical in chemicals %}
+                <tr>
+                    <td>{{ chemical.name }}</td>
+                    <td>{{ chemical.cas_number|default:"N/A" }}</td>
+                    <td>{{ chemical.hs_code|default:"N/A" }}</td>
+                    <td><a href="{% url 'chemical_detail' chemical.id %}">View Details</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
