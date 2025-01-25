@@ -31,6 +31,9 @@
 - Showcase of partner companies with logos, descriptions, and external links  
 - Optional categories or filters for sorting partners  
 
+## Model Website for Comparison
+https://www.lobachemie.com/
+
 ## Tech Stack
 
 - **Backend:** Django  
