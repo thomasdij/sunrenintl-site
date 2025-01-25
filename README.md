@@ -40,10 +40,6 @@
 - **Design Integration:** Export Figma designs to HTML/CSS and adapt them to the website  
 - **SEO:** Technical and on-page SEO optimization for better search engine visibility  
 
-## To Do for Kyle
-
-- Create favicon
-
 ## Admin Accounts
 
 # Usernames
