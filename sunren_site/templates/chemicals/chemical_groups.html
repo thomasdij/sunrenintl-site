@@ -1,6 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
 <h1>Chemical Groups</h1>
 <ul>
     {% for group in groups %}
         <li><a href="{% url 'chemicals_by_group' group.id %}">{{ group.name }}</a></li>
     {% endfor %}
 </ul>
+{% endblock %}

@@ -1,5 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
 <h1>{{ chemical.name }}</h1>
 <p><strong>CAS#:</strong> {{ chemical.cas_number }}</p>
 <p><strong>H.S. Code:</strong> {{ chemical.hs_code }}</p>
 <p><strong>Uses:</strong> {{ chemical.uses }}</p>
 <p><strong>Group:</strong> {{ chemical.group.name }}</p>
+{% endblock %}

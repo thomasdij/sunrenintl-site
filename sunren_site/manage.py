@@ -1,12 +1,23 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
+import subprocess
 import sys
 
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sunren_site.settings')
+    
+    # Run Tailwind watcher in the background
+    if 'runserver' in sys.argv:
+        subprocess.Popen([
+            'tailwindcss',
+            '-i', './styles/tailwind.css',
+            '-o', './static/css/output.css',
+            '--watch'
+        ])
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
