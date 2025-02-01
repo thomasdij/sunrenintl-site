@@ -2,7 +2,14 @@
   "scripts": {
     "build:css": "tailwindcss -i ./styles/tailwind.css -o ./static/css/output.css --minify"
   },
+
   "devDependencies": {
     "tailwindcss": "^4.0.3"
+  },
+
+  "engines": {
+  "node": "18.17.1",
+  "npm": "9.6.7"
   }
+
 }
