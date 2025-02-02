@@ -11,12 +11,15 @@ def main():
     
     # Run Tailwind watcher in the background
     if 'runserver' in sys.argv:
-        subprocess.Popen([
-            'tailwindcss',
-            '-i', './styles/tailwind.css',
-            '-o', './static/css/output.css',
-            '--watch'
-        ])
+        try:
+            subprocess.Popen([
+                'tailwindcss',
+                '-i', './styles/tailwind.css',
+                '-o', './static/css/output.css',
+                '--watch'
+            ])
+        except Exception as e:
+            print(f"Failed to start Tailwind watcher: {e}")
 
     try:
         from django.core.management import execute_from_command_line
