@@ -38,7 +38,7 @@
 
     <div class="grid grid-cols-4 gap-x-10 gap-y-4 max-w-6xl mx-auto mt-6">
         {% for group in groups %}
-            <a href="{% url 'chemicals_by_group' group.id %}" class="w-[286px] h-[330px] bg-white border border-[#64b5f6] rounded-md overflow-hidden text-center hover:shadow-lg transition-transform duration-200 hover:scale-105">
+            <a href="{% url 'chemicals_by_group' group.id %}" class="w-[286px] h-[330px] bg-white border border-[#64b5f6] overflow-hidden text-center hover:shadow-lg transition-transform duration-200 hover:scale-105">
                 <img src="{% static 'images/image' %}{{ forloop.counter }}.png" alt="{{ group.name }}" class="w-full h-[270px] object-cover border-b border-[#64b5f6]">
                 <div class="w-full h-[60px] bg-[#64b5f6] flex items-center justify-center">
                     <h3 class="text-white text-xl font-semibold capitalize">{{ group.name }}</h3>
