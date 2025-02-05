@@ -5,18 +5,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Site{% endblock %}</title>
+    <title>{% block title %}Sunren International{% endblock %}</title>
 
     <!-- Link to Tailwind CSS -->
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 <body class="bg-white text-gray-900">
+    <nav class="bg-white sticky top-0 z-50 shadow-md border-b border-gray-300">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-2">
+            <h1 class="text-xl font-bold text-[#183354]">Sunren International</h1>
+    
+            <form method="get" action="{% url 'search_results' %}" class="flex items-center w-full max-w-lg border border-gray-400 rounded-md px-4 py-2 focus-within:border-blue-500 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16 10.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z" />
+                </svg>
+    
+                <input 
+                    type="text" 
+                    name="q" 
+                    placeholder="Search by Code / Name / CAS" 
+                    value="{% if query %}{{ query }}{% endif %}" 
+                    class="w-full outline-none text-gray-700"
+                >
+                <button type="submit" class="hidden">Search</button>
+            </form>
+        </div>
+    </nav>
 
     <!-- Content from child templates will be injected here -->
     {% block content %}
     {% endblock %}
-
-</body>
+    <footer class="bg-[#183354] text-white py-6 mt-10">
+        <div class="max-w-6xl mx-auto px-4 text-center space-y-4">
+            <p class="text-sm font-semibold tracking-wide">© Copyright Sunren International. All rights reserved.</p>
+            
+            <p class="text-xs leading-6 text-gray-300">
+                Disclaimer: Sunren International makes every effort to ensure that the information displayed on this website is accurate and complete. However, it is not liable for any errors, inaccuracies, or omissions. The majority of the information on sunrenintl.com is subject to change without prior notice or intimation.
+            </p>
+        </div>
+    </footer>
+    </body>
 </html>
 

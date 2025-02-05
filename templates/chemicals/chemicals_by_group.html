@@ -1,30 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-<head>
-    <title>{{ group.name }} - Chemicals</title>
-</head>
-<body>
-    <h1>Chemicals in {{ group.name }}</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>CAS#</th>
-                <th>H.S. Code</th>
-                <th>Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for chemical in chemicals %}
+<div class="max-w-6xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-[#183354] text-center mb-6">
+        Chemicals in {{ group.name }}
+    </h1>
+
+    <div class="overflow-x-auto">
+        <table class="w-full border border-gray-300 rounded-lg shadow-md bg-white">
+            <thead class="bg-[#1564c0] text-white text-left">
                 <tr>
-                    <td>{{ chemical.name }}</td>
-                    <td>{{ chemical.cas_number|default:"N/A" }}</td>
-                    <td>{{ chemical.hs_code|default:"N/A" }}</td>
-                    <td><a href="{% url 'chemical_detail' chemical.id %}">View Details</a></td>
+                    <th class="px-6 py-3">Name</th>
+                    <th class="px-6 py-3">CAS#</th>
+                    <th class="px-6 py-3">H.S. Code</th>
+                    <th class="px-6 py-3">Details</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
+            </thead>
+            <tbody class="divide-y divide-gray-300">
+                {% for chemical in chemicals %}
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-6 py-3">{{ chemical.name }}</td>
+                        <td class="px-6 py-3">{{ chemical.cas_number|default:"N/A" }}</td>
+                        <td class="px-6 py-3">{{ chemical.hs_code|default:"N/A" }}</td>
+                        <td class="px-6 py-3">
+                            <a href="{% url 'chemical_detail' chemical.id %}" class="text-blue-600 hover:underline">View Details</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

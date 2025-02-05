@@ -2,27 +2,6 @@
 {% load static %}
 {% block content %}
 
-<nav class="bg-white sticky top-0 z-50 shadow-md border-b border-gray-300">
-    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-2">
-        <h1 class="text-xl font-bold text-[#183354]">Sunren International</h1>
-
-        <form method="get" action="{% url 'search_results' %}" class="flex items-center w-full max-w-lg border border-gray-400 rounded-md px-4 py-2 focus-within:border-blue-500 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16 10.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z" />
-            </svg>
-
-            <input 
-                type="text" 
-                name="q" 
-                placeholder="Search by Code / Name / CAS" 
-                value="{% if query %}{{ query }}{% endif %}" 
-                class="w-full outline-none text-gray-700"
-            >
-            <button type="submit" class="hidden">Search</button>
-        </form>
-    </div>
-</nav>
-
 <section class="bg-blue-700 text-white py-10 text-center">
     <h1 class="text-4xl font-bold">Sunren International</h1>
     <p class="mt-2 text-lg">Delivering High-Quality Chemicals with Precision, Purity, and a Commitment to Global Excellence.</p>
