@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@import './components.css';
+
+@theme {
+  --color-black: #0d4477;
+  --color-blue-500: #1564c0;
+  --color-blue-600: #183354;
+  --color-blue-700: #1e88e5;
+  --color-gray-700: #454245;
+  --color-lightBlue: #64b5f6;
+  --color-gray-500: #6f6f6f;
+  --color-gray-600: #7c91aa;
+  --color-gray-300: #b3afaf;
+  --color-neutral-100: #fcf9f9;
+  --color-white: #ffffff;
+}

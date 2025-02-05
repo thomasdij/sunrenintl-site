@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@layer components {
+  .btn-primary {
+    @apply bg-[var(--color-blue-500)] text-white font-semibold py-2 px-4 rounded-lg border border-[var(--color-blue-700)] hover:bg-[var(--color-blue-600)] transition duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-[var(--color-blue-500)] text-white font-medium py-2 px-4 rounded-lg border border-[var(--color-gray-300)] hover:bg-[var(--color-blue-600)] transition duration-200;
+  }
+}
+

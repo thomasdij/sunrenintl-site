@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-8">
+    <h2 class="text-2xl font-bold text-center text-blue-600">Search Results for "{{ query }}"</h2>
+
+    {% if chemicals %}
+        <ul class="grid grid-cols-4 gap-6 mt-6">
+            {% for chemical in chemicals %}
+                <li class="border border-gray-300 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <h3 class="text-xl font-semibold">{{ chemical.name }}</h3>
+                    <p class="text-gray-600">CAS Number: {{ chemical.cas_number }}</p>
+                    <p class="text-gray-500">Uses: {{ chemical.uses }}</p>
+                    <a href="{% url 'chemical_detail' chemical.id %}" class="text-blue-500 hover:underline">View Details</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center text-gray-500 mt-6">No chemicals found for "{{ query }}".</p>
+    {% endif %}
+</div>
+{% endblock %}

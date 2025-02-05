@@ -1,44 +1,89 @@
 {% extends "base.html" %}
-
-{% block title %}Sunren International{% endblock %}
-
+{% load static %}
 {% block content %}
-    <header>
-        <h1>Sunren International</h1>
-        <form method="get" action="{% url 'home' %}">
-            <input type="text" name="q" placeholder="Search chemicals..." value="{{ query }}">
-            <button type="submit">Search</button>
+
+<nav class="bg-white sticky top-0 z-50 shadow-md border-b border-gray-300">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-2">
+        <h1 class="text-xl font-bold text-[#183354]">Sunren International</h1>
+
+        <form method="get" action="{% url 'search_results' %}" class="flex items-center w-full max-w-lg border border-gray-400 rounded-md px-4 py-2 focus-within:border-blue-500 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16 10.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z" />
+            </svg>
+
+            <input 
+                type="text" 
+                name="q" 
+                placeholder="Search by Code / Name / CAS" 
+                value="{% if query %}{{ query }}{% endif %}" 
+                class="w-full outline-none text-gray-700"
+            >
+            <button type="submit" class="hidden">Search</button>
         </form>
-    </header>
+    </div>
+</nav>
 
-    <main>
-        {% if chemicals %}
-            <h2>Search Results</h2>
-            <ul>
-                {% for chemical in chemicals %}
-                    <li>
-                        <a href="{% url 'chemical_detail' chemical.id %}">{{ chemical.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% elif query %}
-            <p>No chemicals found for "{{ query }}".</p>
-        {% endif %}
+<section class="bg-blue-700 text-white py-10 text-center">
+    <h1 class="text-4xl font-bold">Sunren International</h1>
+    <p class="mt-2 text-lg">Delivering High-Quality Chemicals with Precision, Purity, and a Commitment to Global Excellence.</p>
+    <div class="flex justify-center gap-4 mt-4">
+        <button class="btn-primary">Advanced Chemical Search</button>
+        <button class="btn-primary">MSDS and COAs</button>
+        <button class="btn-primary">Catalogs and Price Lists</button>
+    </div>
+</section>
 
-        <h2>Chemical Groups</h2>
-        <ul>
-            {% for group in groups %}
-                <li>
-                    <a href="{% url 'chemicals_by_group' group.id %}">{{ group.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </main>
+<section class="py-10 bg-gray-50">
+    <h2 class="text-3xl font-bold text-center text-blue-600">Product Categories</h2>
 
-    <footer>
-        <h2>Contact Us</h2>
-        <p>Placeholder Contact Info: example@chemicaldatabase.com | +1-123-456-7890</p>
-    </footer>
+    <div class="grid grid-cols-4 gap-x-10 gap-y-4 max-w-6xl mx-auto mt-6">
+        {% for group in groups %}
+            <a href="{% url 'chemicals_by_group' group.id %}" class="w-[286px] h-[330px] bg-white border border-[#64b5f6] rounded-md overflow-hidden text-center hover:shadow-lg transition-transform duration-200 hover:scale-105">
+                <img src="{% static 'images/image' %}{{ forloop.counter }}.png" alt="{{ group.name }}" class="w-full h-[270px] object-cover border-b border-[#64b5f6]">
+                <div class="w-full h-[60px] bg-[#64b5f6] flex items-center justify-center">
+                    <h3 class="text-white text-xl font-semibold capitalize">{{ group.name }}</h3>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</section>
+
+<div class="flex justify-center items-center mb-12">
+    <button class="flex items-center justify-center gap-2 w-auto px-4 h-9 rounded border border-[#b3afaf] hover:bg-gray-100 transition">
+      <span class="text-[#183354] text-sm font-normal uppercase leading-[14px] tracking-wide">View All</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+</div>   
+
+<section class="py-10 bg-blue-700 text-white text-center">
+    <h2 class="text-3xl font-bold">About Sunren International</h2>
+    <p class="max-w-2xl mx-auto mt-2 text-lg">From industrial-grade chemicals to specialty compounds, our inventory meets the diverse needs of pharmaceutical, manufacturing, and agricultural industries.</p>
+    <div class="flex justify-center gap-8 mt-6">
+        <div>
+            <h3 class="text-4xl font-bold">30+</h3>
+            <p>Years of Experience</p>
+        </div>
+        <div>
+            <h3 class="text-4xl font-bold">1000+</h3>
+            <p>Products</p>
+        </div>
+        <div>
+            <h3 class="text-4xl font-bold">400+</h3>
+            <p>Clients Served</p>
+        </div>
+    </div>
+</section>
+
+<section class="bg-gray-100 py-10">
+    <h2 class="text-2xl font-bold text-center text-blue-700">Contact Us</h2>
+    <form action="#" method="POST" class="max-w-md mx-auto mt-4">
+        <input type="text" placeholder="Name" class="w-full p-2 border rounded-md mb-2">
+        <input type="email" placeholder="E-mail" class="w-full p-2 border rounded-md mb-2">
+        <button type="submit" class="btn-secondary">Submit Now</button>
+    </form>
+</section>
 {% endblock %}
 
 
