@@ -12,29 +12,30 @@
     </div>
 </section>
 
-<section class="py-10 bg-gray-50">
-    <h2 class="text-3xl font-bold text-center text-blue-600">Product Categories</h2>
+<section class="py-8 bg-gray-50">
+    <h2 class="text-2xl font-bold text-center text-blue-600">Product Categories</h2>
 
-    <div class="grid grid-cols-4 gap-x-10 gap-y-4 max-w-6xl mx-auto mt-6">
+    <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto mt-4 px-4">
         {% for group in groups %}
-            <a href="{% url 'chemicals_by_group' group.id %}" class="w-[286px] h-[330px] bg-white border border-[#64b5f6] overflow-hidden text-center hover:shadow-lg transition-transform duration-200 hover:scale-105">
-                <img src="{% static 'images/image' %}{{ forloop.counter }}.png" alt="{{ group.name }}" class="w-full h-[270px] object-cover border-b border-[#64b5f6]">
-                <div class="w-full h-[60px] bg-[#64b5f6] flex items-center justify-center">
-                    <h3 class="text-white text-xl font-semibold capitalize">{{ group.name }}</h3>
+            <a href="{% url 'chemicals_by_group' group.id %}" class="w-[240px] bg-white border border-[#64b5f6] overflow-hidden text-center hover:shadow-md transition-transform duration-200 hover:scale-105">
+                <img src="{% static 'images/image' %}{{ forloop.counter }}.png" alt="{{ group.name }}" class="w-full h-[200px] object-cover border-b border-[#64b5f6]">
+                <div class="w-full h-[50px] bg-[#64b5f6] flex items-center justify-center">
+                    <h3 class="text-white text-lg font-medium capitalize">{{ group.name }}</h3>
                 </div>
             </a>
         {% endfor %}
     </div>
 </section>
 
-<div class="flex justify-center items-center mb-12">
+<!-- view all button not used because everything is on a single page -->
+<!-- <div class="flex justify-center items-center mb-12">
     <button class="flex items-center justify-center gap-2 w-auto px-4 h-9 rounded border border-[#b3afaf] hover:bg-gray-100 transition">
       <span class="text-[#183354] text-sm font-normal uppercase leading-[14px] tracking-wide">View All</span>
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>
     </button>
-</div>   
+</div>    -->
 
 <section class="py-10 bg-blue-700 text-white text-center">
     <h2 class="text-3xl font-bold">About Sunren International</h2>
