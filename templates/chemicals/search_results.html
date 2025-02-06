@@ -5,7 +5,7 @@
     <h2 class="text-2xl font-bold text-center text-blue-600">Search Results for "{{ query }}"</h2>
 
     {% if chemicals %}
-        <ul class="grid grid-cols-4 gap-6 mt-6">
+        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
             {% for chemical in chemicals %}
                 <li class="border border-gray-300 p-4 rounded-lg shadow-sm hover:shadow-md transition">
                     <h3 class="text-xl font-semibold">{{ chemical.name }}</h3>
