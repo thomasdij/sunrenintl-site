@@ -27,14 +27,15 @@ def home(request):
     else:
         chemicals = None  # No search results if no query provided
     
-    groups = ChemicalGroup.objects.all()  # Fetch all chemical groups for display
-    featured_chemicals = range(1, 9)  # Add this line for the static chemicals
+    groups = list(ChemicalGroup.objects.all())  # Fetch all chemical groups for display
+
+    # Move "Other" to the end
+    groups.sort(key=lambda g: (g.name.lower() == "other", g.name.lower()))
 
     return render(request, 'chemicals/home.html', {
         'chemicals': chemicals,
         'groups': groups,
         'query': query,
-        'featured_chemicals': featured_chemicals  # Pass to the template
     })
 
 def search_results(request):

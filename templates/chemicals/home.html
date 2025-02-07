@@ -1,30 +1,44 @@
-{% extends "base.html" %}
-{% load static %}
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <section class="bg-blue-700 text-white py-10 text-center">
-    <h1 class="text-4xl font-bold">Sunren International</h1>
-    <p class="mt-2 text-lg">Delivering High-Quality Chemicals with Precision, Purity, and a Commitment to Global Excellence.</p>
-    <div class="flex justify-center gap-4 mt-4">
-        <button class="btn-primary">Advanced Chemical Search</button>
-        <button class="btn-primary">MSDS and COAs</button>
-        <button class="btn-primary">Catalogs and Price Lists</button>
-    </div>
+  <h1 class="text-4xl font-bold">Sunren International</h1>
+  <p class="mt-2 text-lg">
+    Delivering High-Quality Chemicals with Precision, Purity, and a Commitment
+    to Global Excellence.
+  </p>
+  <div class="flex justify-center gap-4 mt-4">
+    <button class="btn-primary">Advanced Chemical Search</button>
+    <button class="btn-primary">MSDS and COAs</button>
+    <button class="btn-primary">Catalogs and Price Lists</button>
+  </div>
 </section>
 
 <section class="py-8 bg-gray-50">
-    <h2 class="text-2xl font-bold text-center text-blue-600">Product Categories</h2>
+  <h2 class="text-2xl font-bold text-center text-blue-600">
+    Product Categories
+  </h2>
 
-    <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto mt-4 px-4">
-        {% for group in groups %}
-            <a href="{% url 'chemicals_by_group' group.id %}" class="w-[240px] bg-white border border-[#64b5f6] overflow-hidden text-center hover:shadow-md transition-transform duration-200 hover:scale-105">
-                <img src="{% static 'images/image' %}{{ forloop.counter }}.png" alt="{{ group.name }}" class="w-full h-[200px] object-cover border-b border-[#64b5f6]">
-                <div class="w-full h-[50px] bg-[#64b5f6] flex items-center justify-center">
-                    <h3 class="text-white text-lg font-medium capitalize">{{ group.name }}</h3>
-                </div>
-            </a>
-        {% endfor %}
-    </div>
+  <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto mt-4 px-4">
+    {% for group in groups %}
+    <a
+      href="{% url 'chemicals_by_group' group.id %}"
+      class="w-[240px] bg-white border border-[#64b5f6] overflow-hidden text-center hover:shadow-md transition-transform duration-200 hover:scale-105"
+    >
+      <img
+        src="{% static 'images/image' %}{{ forloop.counter }}.png"
+        alt="{{ group.name }}"
+        class="w-full min-h-[200px] max-h-[220px] object-cover border-b border-[#64b5f6]"
+      />
+      <div
+        class="w-full h-[50px] bg-[#64b5f6] flex items-center justify-center"
+      >
+        <h3 class="text-white text-lg font-medium capitalize">
+          {{ group.name }}
+        </h3>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
 </section>
 
 <!-- view all button not used because everything is on a single page -->
@@ -38,24 +52,26 @@
 </div>    -->
 
 <section class="py-10 bg-blue-700 text-white text-center">
-    <h2 class="text-3xl font-bold">About Sunren International</h2>
-    <p class="max-w-2xl mx-auto mt-2 text-lg">From industrial-grade chemicals to specialty compounds, our inventory meets the diverse needs of pharmaceutical, manufacturing, and agricultural industries.</p>
-    <div class="flex justify-center gap-8 mt-6">
-        <div>
-            <h3 class="text-4xl font-bold">30+</h3>
-            <p>Years of Experience</p>
-        </div>
-        <div>
-            <h3 class="text-4xl font-bold">1000+</h3>
-            <p>Products</p>
-        </div>
-        <div>
-            <h3 class="text-4xl font-bold">400+</h3>
-            <p>Clients Served</p>
-        </div>
+  <h2 class="text-3xl font-bold">About Sunren International</h2>
+  <p class="max-w-2xl mx-auto mt-2 text-lg">
+    From industrial-grade chemicals to specialty compounds, our inventory meets
+    the diverse needs of pharmaceutical, manufacturing, and agricultural
+    industries.
+  </p>
+  <div class="flex justify-center gap-8 mt-6">
+    <div>
+      <h3 class="text-4xl font-bold">30+</h3>
+      <p>Years of Experience</p>
     </div>
+    <div>
+      <h3 class="text-4xl font-bold">1000+</h3>
+      <p>Products</p>
+    </div>
+    <div>
+      <h3 class="text-4xl font-bold">400+</h3>
+      <p>Clients Served</p>
+    </div>
+  </div>
 </section>
 
 {% endblock %}
-
-
