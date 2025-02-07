@@ -2479,6 +2479,11 @@
       }
     }
   }
+  .sm\:w-auto {
+    @media (width >= 40rem) {
+      width: auto;
+    }
+  }
   .sm\:min-w-\[300px\] {
     @media (width >= 40rem) {
       min-width: 300px;
