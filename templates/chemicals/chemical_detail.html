@@ -2,7 +2,10 @@
 
 {% block content %}
 <div class="max-w-4xl mx-auto py-10 px-6 bg-white shadow-lg rounded-lg border border-gray-300 mt-16">
-    <h1 class="text-3xl font-bold text-[#183354] mb-6">{{ chemical.name }}</h1>
+    <h1 class="text-3xl font-bold text-[#183354] mb-6 break-words">
+        {{ chemical.name }}
+    </h1>
+    
 
     <div class="space-y-4">
         <p class="text-lg"><strong class="text-[#1564c0]">CAS#:</strong> {{ chemical.cas_number|default:"N/A" }}</p>
