@@ -18,7 +18,7 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = ['sunrenintl-site.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['sunrenintl-site.onrender.com', 'localhost', '127.0.0.1', 'www.sunrenintl.com', 'sunrenintl.com']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
