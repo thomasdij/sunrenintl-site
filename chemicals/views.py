@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from .models import Chemical, ChemicalGroup
+from django.core.mail import send_mail
 
 def chemical_groups(request):
     groups = ChemicalGroup.objects.all()
@@ -53,3 +54,27 @@ def search_results(request):
         'query': query,
         'chemicals': chemicals
     })
+
+def contact_form(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        
+        # Validate that all fields are filled
+        if name and phone and email:
+            # Prepare email message
+            subject = f"New Contact Form Submission from {name}"
+            message = f"Name: {name}\nPhone: {phone}\nEmail: {email}"
+            from_email = email  # The sender's email
+            recipient_list = ['customerservice@sunrenintl.com']
+            
+            # Send email
+            send_mail(subject, message, from_email, recipient_list)
+            
+            # Return success response
+            return render(request, 'chemicals/contact_success.html')
+        
+    # If not POST or validation failed, redirect to home
+    from django.shortcuts import redirect
+    return redirect('home')

@@ -6,4 +6,5 @@ urlpatterns = [
     path('groups/<int:group_id>/', views.chemicals_by_group, name='chemicals_by_group'),
     path('<int:chemical_id>/', views.chemical_detail, name='chemical_detail'),
     path('search/', views.search_results, name='search_results'),
+    path('contact/', views.contact_form, name='contact_form'),
 ]

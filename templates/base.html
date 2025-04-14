@@ -56,10 +56,11 @@
 
     <section class="bg-gray-100 mt-20">
         <h2 class="text-2xl font-bold text-center text-blue-700 pt-4">Contact Us</h2>
-        <form action="#" method="POST" class="max-w-md mx-auto mt-4 pb-6">
-            <input type="text" placeholder="Name" class="w-full p-2 border rounded-md mb-2">
-            <input type="tel" placeholder="Phone Number" class="w-full p-2 border rounded-md mb-2">
-            <input type="email" placeholder="E-mail" class="w-full p-2 border rounded-md mb-2">
+        <form action="{% url 'contact_form' %}" method="POST" class="max-w-md mx-auto mt-4 pb-6">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Name" class="w-full p-2 border rounded-md mb-2" required>
+            <input type="tel" name="phone" placeholder="Phone Number" class="w-full p-2 border rounded-md mb-2" required>
+            <input type="email" name="email" placeholder="E-mail" class="w-full p-2 border rounded-md mb-2" required>
             <button type="submit" class="btn-secondary">Submit Now</button>
         </form>
         <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-4 mb-4 px-4">
