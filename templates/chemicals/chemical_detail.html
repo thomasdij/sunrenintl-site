@@ -1,22 +1,54 @@
 {% extends "base.html" %}
 
-{% block content %}
-<div class="max-w-4xl mx-auto py-10 px-6 bg-white shadow-lg rounded-lg border border-gray-300 mt-16 mb-20">
-    <h1 class="text-3xl font-bold text-[#183354] mb-6 break-words">
-        {{ chemical.name }}
-    </h1>
-    
+{% block title %}{{ chemical.name }}{% if chemical.cas_number %} (CAS: {{ chemical.cas_number }}){% endif %} - Chemical Details - Sunren International Inc.{% endblock %}
 
-    <div class="space-y-4">
-        <p class="text-lg"><strong class="text-[#1564c0]">CAS#:</strong> {{ chemical.cas_number|default:"N/A" }}</p>
-        <p class="text-lg"><strong class="text-[#1564c0]">H.S. Code:</strong> {{ chemical.hs_code|default:"N/A" }}</p>
-        <p class="text-lg"><strong class="text-[#1564c0]">Uses:</strong> {{ chemical.uses|default:"Not specified" }}</p>
-        <p class="text-lg"><strong class="text-[#1564c0]">Group:</strong> 
-            <a href="{% url 'chemicals_by_group' chemical.group.id %}" 
-               class="text-blue-600 hover:underline">
-               {{ chemical.group.name }}
-            </a>
-        </p>
-    </div>
-</div>
+{% block meta_description %}{% if chemical.cas_number %}Detailed information about {{ chemical.name }} (CAS: {{ chemical.cas_number }}).{% else %}Detailed information about {{ chemical.name }}.{% endif %} View specifications, uses, and applications. Available from Sunren International Inc.{% endblock %}
+
+{% block og_type %}product{% endblock %}
+{% block og_title %}{{ chemical.name }}{% if chemical.cas_number %} (CAS: {{ chemical.cas_number }}){% endif %} - Chemical Details - Sunren International Inc.{% endblock %}
+{% block og_description %}{% if chemical.cas_number %}Detailed information about {{ chemical.name }} (CAS: {{ chemical.cas_number }}).{% else %}Detailed information about {{ chemical.name }}.{% endif %} View specifications, uses, and applications. Available from Sunren International Inc.{% endblock %}
+
+{% block content %}
+<main class="max-w-4xl mx-auto py-10 px-6 bg-white shadow-lg rounded-lg border border-gray-300 mt-16 mb-20">
+    <header class="mb-8">
+        <h1 class="text-3xl font-bold text-[#183354] mb-4 break-words">
+            {{ chemical.name }}
+        </h1>
+    </header>
+
+    <section class="space-y-6">
+        <h2 class="text-xl font-semibold text-[#183354] mb-4">Chemical Specifications</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-lg font-medium text-[#1564c0] mb-2">CAS Number</h3>
+                    <p class="text-lg">{{ chemical.cas_number|default:"Not available" }}</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-[#1564c0] mb-2">H.S. Code</h3>
+                    <p class="text-lg">{{ chemical.hs_code|default:"Not available" }}</p>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-lg font-medium text-[#1564c0] mb-2">Chemical Group</h3>
+                    <p class="text-lg">
+                        <a href="{% url 'chemicals_by_group' chemical.group.slug %}" 
+                           class="text-blue-600 hover:underline">
+                           {{ chemical.group.name }}
+                        </a>
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-[#1564c0] mb-2">Applications & Uses</h3>
+                    <p class="text-lg">{{ chemical.uses|default:"Not specified" }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}

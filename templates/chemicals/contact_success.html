@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Contact Form Submitted - Sunren International Inc.{% endblock %}
+
+{% block meta_description %}Thank you for contacting Sunren International Inc. Your inquiry has been successfully submitted. Our team will respond to your chemical supply needs promptly.{% endblock %}
+
+{% block og_type %}website{% endblock %}
+{% block og_title %}Contact Form Submitted - Sunren International Inc.{% endblock %}
+{% block og_description %}Thank you for contacting Sunren International Inc. Your inquiry has been successfully submitted. Our team will respond to your chemical supply needs promptly.{% endblock %}
+
 {% block content %}
-<section class="py-20 text-center">
-    <div class="max-w-md mx-auto bg-green-50 p-6 rounded-lg shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<main class="py-20 text-center">
+    <section class="max-w-md mx-auto bg-green-50 p-6 rounded-lg shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
         </svg>
-        <h2 class="text-2xl font-bold text-green-700 mt-4">Thank You!</h2>
+        <h1 class="text-2xl font-bold text-green-700 mt-4">Thank You!</h1>
         <p class="mt-2 text-gray-700">Your message has been sent successfully. We will contact you shortly.</p>
         <a href="{% url 'home' %}" class="mt-6 inline-block px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
             Return to Home
         </a>
-    </div>
-</section>
+    </section>
+</main>
 {% endblock %} 

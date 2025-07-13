@@ -1,34 +1,54 @@
 {% extends "base.html" %}
 
-{% block content %}
-<div class="max-w-6xl mx-auto py-10 mb-4 px-4">
-    <h1 class="text-3xl font-bold text-[#183354] text-center mb-6">
-        Chemicals in {{ group.name }}
-    </h1>
+{% block title %}{{ group.name }} Chemicals - Sunren International Inc.{% endblock %}
 
-    <div class="overflow-x-auto">
+{% block meta_description %}Browse {{ group.name }} chemicals from Sunren International Inc. Complete catalog with CAS numbers, specifications, and detailed product information.{% endblock %}
+
+{% block og_type %}website{% endblock %}
+{% block og_title %}{{ group.name }} Chemicals - Sunren International Inc.{% endblock %}
+{% block og_description %}Browse {{ group.name }} chemicals from Sunren International Inc. Complete catalog with CAS numbers, specifications, and detailed product information.{% endblock %}
+
+{% block content %}
+<main class="max-w-6xl mx-auto py-10 mb-4 px-4">
+    <header class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-[#183354] mb-4">
+            {{ group.name }} Chemicals
+        </h1>
+    </header>
+
+    <section class="overflow-x-auto">
+        <h2 class="sr-only">Chemical Product List</h2>
         <table class="w-full border border-gray-300 rounded-lg shadow-md bg-white">
             <thead class="bg-[#1564c0] text-white text-left">
                 <tr>
-                    <th class="px-6 py-3">Name</th>
-                    <th class="px-6 py-3">CAS#</th>
-                    <th class="px-6 py-3">H.S. Code</th>
-                    <th class="px-6 py-3">Details</th>
+                    <th scope="col" class="px-6 py-3">Chemical Name</th>
+                    <th scope="col" class="px-6 py-3">CAS Number</th>
+                    <th scope="col" class="px-6 py-3">H.S. Code</th>
+                    <th scope="col" class="px-6 py-3">Product Details</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-300">
                 {% for chemical in chemicals %}
                     <tr class="hover:bg-gray-100 transition">
-                        <td class="px-6 py-3">{{ chemical.name }}</td>
-                        <td class="px-6 py-3">{{ chemical.cas_number|default:"N/A" }}</td>
-                        <td class="px-6 py-3">{{ chemical.hs_code|default:"N/A" }}</td>
+                        <td class="px-6 py-3 font-medium">{{ chemical.name }}</td>
+                        <td class="px-6 py-3">{{ chemical.cas_number|default:"Not available" }}</td>
+                        <td class="px-6 py-3">{{ chemical.hs_code|default:"Not available" }}</td>
                         <td class="px-6 py-3">
-                            <a href="{% url 'chemical_detail' chemical.id %}" class="text-blue-600 hover:underline">View Details</a>
+                            <a href="{% url 'chemical_detail' chemical.slug %}" 
+                               class="text-blue-600 hover:underline font-medium">
+                                View Details
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </div>
-</div>
+    </section>
+    
+    {% if not chemicals %}
+        <section class="text-center py-8">
+            <p class="text-gray-500">No chemicals found in this category.</p>
+        </section>
+    {% endif %}
+</main>
 {% endblock %}

@@ -1,4 +1,16 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block title %}Sunren International Inc. - High-Quality Chemicals & Specialty Compounds{% endblock %}
+
+{% block meta_description %}Discover Sunren International Inc.'s comprehensive catalog of high-quality chemicals and specialty compounds. Serving pharmaceutical, manufacturing, and agricultural industries with precision, purity, and global excellence.{% endblock %}
+
+{% block og_type %}website{% endblock %}
+{% block og_title %}Sunren International Inc. - High-Quality Chemicals & Specialty Compounds{% endblock %}
+{% block og_description %}Discover Sunren International Inc.'s comprehensive catalog of high-quality chemicals and specialty compounds. Serving pharmaceutical, manufacturing, and agricultural industries with precision, purity, and global excellence.{% endblock %}
+{% block og_image %}{% static 'images/background.png' %}{% endblock %}
+
+{% block content %}
 
 <style>
   .bg-image-section {
@@ -33,10 +45,6 @@
     Delivering High-Quality Chemicals with Precision, Purity, and a Commitment
     to Global Excellence.
   </p>
-  <!-- <div class="flex justify-center gap-4 mt-4">
-    <button class="btn-primary">Advanced Chemical Search</button>
-    <button class="btn-primary">MSDS and COAs</button>
-  </div> -->
 </section>
 
 <section class="py-8 px-4 bg-gray-50">
@@ -47,12 +55,12 @@
   <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto mt-4 px-4">
     {% for group in groups %}
     <a
-      href="{% url 'chemicals_by_group' group.id %}"
+      href="{% url 'chemicals_by_group' group.slug %}"
       class="w-[240px] bg-white border border-[#64b5f6] overflow-hidden text-center hover:shadow-md transition-transform duration-200 hover:scale-105"
     >
       <img
         src="{% static 'images/image' %}{{ forloop.counter }}.png"
-        alt="{{ group.name }}"
+        alt="{{ group.name }} chemicals category - Browse {{ group.name|lower }} compounds and specialty chemicals from Sunren International Inc."
         class="w-full min-h-[200px] max-h-[220px] object-cover border-b border-[#64b5f6]"
       />
       <div
@@ -66,16 +74,6 @@
     {% endfor %}
   </div>
 </section>
-
-<!-- view all button not used because everything is on a single page -->
-<!-- <div class="flex justify-center items-center mb-12">
-    <button class="flex items-center justify-center gap-2 w-auto px-4 h-9 rounded border border-[#b3afaf] hover:bg-gray-100 transition">
-      <span class="text-[#183354] text-sm font-normal uppercase leading-[14px] tracking-wide">View All</span>
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
-</div>    -->
 
 <section class="py-10 px-4 bg-blue-700 text-white text-center bg-image-section">
   <h2 class="text-3xl font-bold">About Sunren International Inc.</h2>

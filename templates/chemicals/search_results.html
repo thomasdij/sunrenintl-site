@@ -1,22 +1,44 @@
 {% extends "base.html" %}
 
+{% block title %}Search Results for "{{ query }}" - Sunren International Inc.{% endblock %}
+
+{% block meta_description %}Search results for "{{ query }}" in Sunren International Inc.'s chemical catalog. Find detailed information about chemical compounds, CAS numbers, and applications.{% endblock %}
+
+{% block og_type %}website{% endblock %}
+{% block og_title %}Search Results for "{{ query }}" - Sunren International Inc.{% endblock %}
+{% block og_description %}Search results for "{{ query }}" in Sunren International Inc.'s chemical catalog. Find detailed information about chemical compounds, CAS numbers, and applications.{% endblock %}
+
 {% block content %}
-<div class="max-w-6xl mx-auto py-8 mb-4">
-    <h2 class="text-2xl font-bold text-center text-blue-600">Search Results for "{{ query }}"</h2>
+<main class="max-w-6xl mx-auto py-8 mb-4">
+    <header class="text-center mb-8">
+        <h1 class="text-2xl font-bold text-blue-600 mb-2">Search Results for "{{ query }}"</h1>
+        <p class="text-gray-600">
+            {% if chemicals %}
+                Found {{ chemicals|length }} chemical{{ chemicals|length|pluralize }} matching your search.
+            {% else %}
+                No chemicals found matching your search criteria.
+            {% endif %}
+        </p>
+    </header>
 
     {% if chemicals %}
-        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {% for chemical in chemicals %}
-                <li class="border border-gray-300 p-4 rounded-lg shadow-sm hover:shadow-md transition">
-                    <h3 class="text-xl font-semibold break-words">{{ chemical.name }}</h3>
-                    <p class="text-gray-600">CAS Number: {{ chemical.cas_number }}</p>
-                    <p class="text-gray-500">Uses: {{ chemical.uses }}</p>
-                    <a href="{% url 'chemical_detail' chemical.id %}" class="text-blue-500 hover:underline">View Details</a>
-                </li>
+                <article class="border border-gray-300 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <h2 class="text-xl font-semibold break-words mb-2">{{ chemical.name }}</h2>
+                    <p class="text-gray-600 mb-1"><strong>CAS Number:</strong> {{ chemical.cas_number|default:"N/A" }}</p>
+                    <p class="text-gray-500 mb-3"><strong>Uses:</strong> {{ chemical.uses|default:"Not specified" }}</p>
+                    <a href="{% url 'chemical_detail' chemical.slug %}" class="text-blue-500 hover:underline font-medium">
+                        View Details
+                    </a>
+                </article>
             {% endfor %}
-        </ul>
+        </section>
     {% else %}
-        <p class="text-center text-gray-500 mt-6">No chemicals found for "{{ query }}".</p>
+        <section class="text-center">
+            <p class="text-gray-500 mt-6 mb-4">No chemicals found for "{{ query }}".</p>
+            <p class="text-gray-600">Try searching with different keywords or browse our <a href="{% url 'chemical_groups' %}" class="text-blue-600 hover:underline">chemical categories</a>.</p>
+        </section>
     {% endif %}
-</div>
+</main>
 {% endblock %}

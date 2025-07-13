@@ -7,13 +7,13 @@ def chemical_groups(request):
     groups = ChemicalGroup.objects.all()
     return render(request, 'chemicals/chemical_groups.html', {'groups': groups})
 
-def chemicals_by_group(request, group_id):
-    group = get_object_or_404(ChemicalGroup, id=group_id)
+def chemicals_by_group(request, group_slug):
+    group = get_object_or_404(ChemicalGroup, slug=group_slug)
     chemicals = group.chemicals.all()
     return render(request, 'chemicals/chemicals_by_group.html', {'group': group, 'chemicals': chemicals})
 
-def chemical_detail(request, chemical_id):
-    chemical = get_object_or_404(Chemical, id=chemical_id)
+def chemical_detail(request, chemical_slug):
+    chemical = get_object_or_404(Chemical, slug=chemical_slug)
     return render(request, 'chemicals/chemical_detail.html', {'chemical': chemical})
 
 def home(request):
