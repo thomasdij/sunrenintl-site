@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_opensearch_dsl',
     'chemicals',
 ]
 
@@ -153,3 +154,16 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'Sunren International <thomas@sunrenintl.com>'
+
+# OpenSearch Configuration (compatible with Elasticsearch)
+OPENSEARCH_URL = config('ELASTICSEARCH_URL', default='')
+
+if OPENSEARCH_URL:
+    OPENSEARCH_DSL = {
+        'default': {
+            'hosts': OPENSEARCH_URL
+        },
+    }
+else:
+    # OpenSearch disabled - will fall back to Django ORM search
+    OPENSEARCH_DSL = {}

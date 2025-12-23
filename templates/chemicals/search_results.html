@@ -37,7 +37,7 @@
     {% else %}
         <section class="text-center">
             <p class="text-gray-500 mt-6 mb-4">No chemicals found for "{{ query }}".</p>
-            <p class="text-gray-600">Try searching with different keywords or browse our <a href="{% url 'chemical_groups' %}" class="text-blue-600 hover:underline">chemical categories</a>.</p>
+            <p class="text-gray-600">Try searching with different keywords or browse our <a href="{% url 'home' %}" class="text-blue-600 hover:underline">chemical categories</a>.</p>
         </section>
     {% endif %}
 </main>

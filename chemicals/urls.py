@@ -25,5 +25,6 @@ urlpatterns = [
     path('groups/<int:group_id>/', redirect_old_group_url, name='old_chemicals_by_group'),  # Redirect old group URLs
     path('<int:chemical_id>/', redirect_old_chemical_url, name='old_chemical_detail'),  # Redirect old URLs
     path('search/', views.search_results, name='search_results'),
+    path('api/autocomplete/', views.autocomplete, name='autocomplete'),  # Autocomplete API
     path('contact/', views.contact_form, name='contact_form'),
 ]

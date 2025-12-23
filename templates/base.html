@@ -50,21 +50,29 @@
             <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
         </a>        
 
-        <!-- Search Bar -->
-        <form method="get" action="{% url 'search_results' %}" 
-              class="flex items-center w-full sm:w-auto max-w-lg border border-gray-400 rounded-md px-4 py-2 focus-within:border-blue-500 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16 10.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z" />
-            </svg>
-            <input 
-                type="text" 
-                name="q" 
-                placeholder="Search by Name / CAS / Uses" 
-                value="{% if query %}{{ query }}{% endif %}" 
-                class="w-full min-w-[250px] sm:min-w-[300px] outline-none text-gray-700"
-            >
-            <button type="submit" class="hidden">Search</button>
-        </form>
+        <!-- Search Bar with Autocomplete -->
+        <div class="relative w-full sm:w-auto max-w-lg" id="search-container">
+            <form method="get" action="{% url 'search_results' %}" 
+                  class="flex items-center border border-gray-400 rounded-md px-4 py-2 focus-within:border-blue-500 transition bg-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16 10.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z" />
+                </svg>
+                <input 
+                    type="text" 
+                    name="q" 
+                    id="search-input"
+                    placeholder="Search by Name / CAS / Uses" 
+                    value="{% if query %}{{ query }}{% endif %}" 
+                    class="w-full min-w-[250px] sm:min-w-[300px] outline-none text-gray-700"
+                    autocomplete="off"
+                >
+                <button type="submit" class="hidden">Search</button>
+            </form>
+            <!-- Autocomplete Dropdown -->
+            <div id="autocomplete-dropdown" 
+                 class="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-md shadow-lg mt-1 z-50 hidden max-h-80 overflow-y-auto">
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -105,6 +113,140 @@
             </p>
         </div>
     </footer>
+
+    <!-- Autocomplete JavaScript -->
+    <script>
+    (function() {
+        const searchInput = document.getElementById('search-input');
+        const dropdown = document.getElementById('autocomplete-dropdown');
+        const searchContainer = document.getElementById('search-container');
+        let debounceTimer;
+        let selectedIndex = -1;
+        let suggestions = [];
+
+        if (!searchInput || !dropdown) return;
+
+        // Debounced fetch for autocomplete
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            clearTimeout(debounceTimer);
+            
+            if (query.length < 2) {
+                hideDropdown();
+                return;
+            }
+
+            debounceTimer = setTimeout(() => {
+                fetchSuggestions(query);
+            }, 150);
+        });
+
+        // Keyboard navigation
+        searchInput.addEventListener('keydown', function(e) {
+            if (!dropdown.classList.contains('hidden')) {
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedIndex = Math.min(selectedIndex + 1, suggestions.length - 1);
+                    updateSelection();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedIndex = Math.max(selectedIndex - 1, -1);
+                    updateSelection();
+                } else if (e.key === 'Enter' && selectedIndex >= 0) {
+                    e.preventDefault();
+                    navigateToSuggestion(suggestions[selectedIndex]);
+                } else if (e.key === 'Escape') {
+                    hideDropdown();
+                }
+            }
+        });
+
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchContainer.contains(e.target)) {
+                hideDropdown();
+            }
+        });
+
+        // Show dropdown when focusing on input with existing value
+        searchInput.addEventListener('focus', function() {
+            if (this.value.trim().length >= 2 && suggestions.length > 0) {
+                showDropdown();
+            }
+        });
+
+        async function fetchSuggestions(query) {
+            try {
+                const response = await fetch(`/api/autocomplete/?q=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                suggestions = data.suggestions || [];
+                selectedIndex = -1;
+                renderSuggestions();
+            } catch (error) {
+                console.error('Autocomplete error:', error);
+                hideDropdown();
+            }
+        }
+
+        function renderSuggestions() {
+            if (suggestions.length === 0) {
+                hideDropdown();
+                return;
+            }
+
+            dropdown.innerHTML = suggestions.map((item, index) => `
+                <a href="/chemical/${item.slug}/" 
+                   class="autocomplete-item block px-4 py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0 ${index === selectedIndex ? 'bg-blue-50' : ''}"
+                   data-index="${index}">
+                    <div class="font-medium text-gray-800">${highlightMatch(item.name, searchInput.value)}</div>
+                    <div class="text-sm text-gray-500 flex gap-3 mt-0.5">
+                        ${item.cas_number ? `<span>CAS: ${item.cas_number}</span>` : ''}
+                        ${item.group ? `<span class="text-blue-600">${item.group}</span>` : ''}
+                    </div>
+                </a>
+            `).join('');
+
+            // Add click handlers
+            dropdown.querySelectorAll('.autocomplete-item').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    selectedIndex = parseInt(this.dataset.index);
+                    updateSelection();
+                });
+            });
+
+            showDropdown();
+        }
+
+        function highlightMatch(text, query) {
+            if (!query) return text;
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return text.replace(regex, '<mark class="bg-yellow-200 rounded px-0.5">$1</mark>');
+        }
+
+        function updateSelection() {
+            dropdown.querySelectorAll('.autocomplete-item').forEach((item, index) => {
+                if (index === selectedIndex) {
+                    item.classList.add('bg-blue-50');
+                } else {
+                    item.classList.remove('bg-blue-50');
+                }
+            });
+        }
+
+        function navigateToSuggestion(item) {
+            window.location.href = `/chemical/${item.slug}/`;
+        }
+
+        function showDropdown() {
+            dropdown.classList.remove('hidden');
+        }
+
+        function hideDropdown() {
+            dropdown.classList.add('hidden');
+            selectedIndex = -1;
+        }
+    })();
+    </script>
     </body>
 </html>
 
